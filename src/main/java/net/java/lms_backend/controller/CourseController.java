@@ -1,20 +1,15 @@
 package net.java.lms_backend.controller;
 
-import net.java.lms_backend.Repositrory.PerformanceRepo;
-import net.java.lms_backend.Service.CourseService;
+import net.java.lms_backend.repositrory.PerformanceRepo;
+import net.java.lms_backend.service.CourseService;
 import net.java.lms_backend.dto.*;
-import net.java.lms_backend.entity.Attendance;
-import net.java.lms_backend.entity.Course;
 import net.java.lms_backend.entity.Lesson;
-import net.java.lms_backend.entity.Performance;
-import net.java.lms_backend.mapper.PerformanceMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/courses")
