@@ -1,8 +1,7 @@
 package net.java.lms_backend.controller;
 
-import net.java.lms_backend.service.AssignmentService;
-import net.java.lms_backend.dto.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.java.lms_backend.Service.AssignmentService;
+import net.java.lms_backend.dto.AssignmentDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +10,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/assignment")
 public class AssignmentController {
-    @Autowired
-    private AssignmentService assignmentService;
+
+    private final AssignmentService assignmentService;
+
+    // Constructor injection makes the dependency explicit and allows the field to be final.
+    public AssignmentController(AssignmentService assignmentService) {
+        if (assignmentService == null) {
+            throw new IllegalArgumentException("AssignmentService cannot be null");
+        }
+        this.assignmentService = assignmentService;
+    }
 
     // Create a new assignment
     @PostMapping
