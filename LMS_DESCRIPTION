@@ -1,0 +1,29 @@
+The project is a Learning Management System (LMS) backend developed in Java, structured as a Spring Boot application. Here’s a high-level textual description of what the project does based on its code structure:
+
+Project Overview:
+
+This LMS backend system supports a comprehensive online education platform. It facilitates interaction between students, instructors, and administrative users through functionalities such as:
+
+	1.	User Management:
+	•	Handles registration, authentication (including JWT security), and role-based access for students, instructors, and admins.
+	2.	Course and Lesson Management:
+	•	Instructors can create and manage courses and lessons.
+	•	Students can enroll in courses and access corresponding lessons and materials.
+	3.	Assessment and Quiz System:
+	•	Provides capabilities for creating quizzes and questions.
+	•	Supports multiple question types and options.
+	•	Allows students to attempt quizzes and records their performance.
+	4.	Assignments and Submissions:
+	•	Instructors can post assignments.
+	•	Students can submit solutions.
+	•	Submissions are reviewed and graded by instructors.
+	5.	Attendance and Performance Tracking:
+	•	Tracks student attendance.
+	•	Monitors student performance across quizzes, assignments, and overall course engagement.
+	6.	Security:
+	•	Uses Spring Security with JWT for user authentication and secure API access.
+	7.	Email Services:
+	•	Includes mechanisms for sending confirmation emails and validating users.
+	8.	Database Integration:
+	•	Connects to a database using JPA repositories.
+	•	Contains SQL initialization scripts and configuration files.
