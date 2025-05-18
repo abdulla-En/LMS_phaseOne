@@ -1,5 +1,6 @@
 package net.java.lms_backend.service;
 
+import net.java.lms_backend.dto.ConfirmResetDTO;
 import net.java.lms_backend.dto.ResetPasswordDTO;
 import net.java.lms_backend.repositrory.EmailSender;
 import net.java.lms_backend.repositrory.UserRepository;
@@ -184,6 +185,22 @@ public class AuthService {
 
         return ResponseEntity.ok("If the email exists, a reset link has been sent.");
     }
+    @Transactional
+    public ResponseEntity<String> confirmReset(ConfirmResetDTO dto) {
+        Optional<User> userOptional = userRepository.findByResetToken(dto.getToken());
 
-
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPassword(dto.getNewPassword());
+            user.setResetToken(null);
+            userRepository.save(user);
+            return ResponseEntity.ok("Password has been reset successfully.");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid or expired reset token.");
+        }
+    }
 }
+
+
+
+

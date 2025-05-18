@@ -1,5 +1,6 @@
 package net.java.lms_backend.controller;
 
+import net.java.lms_backend.dto.ConfirmResetDTO;
 import net.java.lms_backend.dto.ResetPasswordDTO;
 import net.java.lms_backend.service.AuthService;
 import net.java.lms_backend.dto.LoginRequestDTO;
@@ -38,5 +39,10 @@ public class AuthController {
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
         return authService.resetPassword(resetPasswordDTO);
     }
-
+    @PostMapping("/confirm-reset")
+    public ResponseEntity<?> confirmReset(@RequestBody ConfirmResetDTO confirmResetDTO) {
+        return authService.confirmReset(confirmResetDTO);
+   }
 }
+
+
