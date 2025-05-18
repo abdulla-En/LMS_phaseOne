@@ -32,18 +32,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless authentication
                 .authorizeHttpRequests(auth -> auth
-                            .requestMatchers(
-                                "/**"
-
-                            )
-//                        .requestMatchers("/api/auth/login",
-//                                "/api/auth/register",
-//                                "/api/auth/confirm").permitAll() // Public endpoints for login, register, etc.
-//                        .anyRequest().authenticated() // All other requests require authentication
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/confirm").permitAll() // السماح بالوصول بدون توثيق
+                        .anyRequest().authenticated() // أي طلب غير ذلك يتطلب توثيق
                 );
 
         return http.build();
     }
+
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
