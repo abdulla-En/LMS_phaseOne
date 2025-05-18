@@ -1,6 +1,6 @@
 package net.java.lms_backend.Security;
 
-import net.java.lms_backend.Repositrory.UserRepository;
+import net.java.lms_backend.repositrory.UserRepository;
 import net.java.lms_backend.entity.Admin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

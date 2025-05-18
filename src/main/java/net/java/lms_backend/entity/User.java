@@ -1,5 +1,6 @@
 package net.java.lms_backend.entity;
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,10 +54,6 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
     @Column
     private boolean locked=false;
     @Column
@@ -66,20 +63,28 @@ public class User implements UserDetails {
         this.role = userRole;
     }
 
+    @Getter
     @Enumerated(EnumType.STRING)
     private Role role= Role.USER;
+
+    public Role getRole()
+    {
+        return this.role;
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Course> courses=new ArrayList<Course>();
+    private transient List<Course> courses=new ArrayList<>();
+
 
 
     public User(
-                String firstName,
-                String lastName,
-                String username,
-                String password,
-                String email,
-                boolean locked,
-                boolean enabled) {
+            String firstName,
+            String lastName,
+            String username,
+            String password,
+            String email,
+            boolean locked,
+            boolean enabled) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

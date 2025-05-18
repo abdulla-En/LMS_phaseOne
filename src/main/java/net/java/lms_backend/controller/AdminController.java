@@ -1,7 +1,7 @@
 package net.java.lms_backend.controller;
 
 import net.java.lms_backend.entity.User;
-import net.java.lms_backend.Service.AdminService;
+import net.java.lms_backend.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

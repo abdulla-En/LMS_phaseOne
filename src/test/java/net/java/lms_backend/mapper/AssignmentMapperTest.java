@@ -1,6 +1,6 @@
 package net.java.lms_backend.mapper;
 
-import net.java.lms_backend.Repositrory.CourseRepository;
+import net.java.lms_backend.repositrory.CourseRepository;
 import net.java.lms_backend.dto.AssignmentDTO;
 import net.java.lms_backend.entity.Assignment;
 import net.java.lms_backend.entity.Course;

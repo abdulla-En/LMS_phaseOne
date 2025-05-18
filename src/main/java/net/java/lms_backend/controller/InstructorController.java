@@ -1,10 +1,7 @@
 package net.java.lms_backend.controller;
 
-import net.java.lms_backend.Service.StudentService;
-import net.java.lms_backend.Service.SubmissionService;
-import net.java.lms_backend.dto.StudentDTO;
+import net.java.lms_backend.service.SubmissionService;
 import net.java.lms_backend.dto.SubmissionDTO;
-import net.java.lms_backend.entity.Submission;
 import net.java.lms_backend.mapper.SubmissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

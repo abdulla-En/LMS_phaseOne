@@ -1,6 +1,6 @@
 package net.java.lms_backend.controller;
 
-import net.java.lms_backend.Service.QuizService;
+import net.java.lms_backend.service.QuizService;
 import net.java.lms_backend.dto.QuizDTO;
 import net.java.lms_backend.entity.Quiz;
 import net.java.lms_backend.entity.QuizAttempt;

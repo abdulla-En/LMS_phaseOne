@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import static org.mockito.Mockito.mock;
 
-@SpringBootTest(properties = "spring.config.name=application-test")
+@SpringBootTest
 class LmsBackendApplicationTests {
 
     @Nested

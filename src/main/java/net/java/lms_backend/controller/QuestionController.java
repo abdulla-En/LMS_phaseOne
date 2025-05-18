@@ -1,6 +1,6 @@
 package net.java.lms_backend.controller;
 
-import net.java.lms_backend.Service.QuestionService;
+import net.java.lms_backend.service.QuestionService;
 import net.java.lms_backend.dto.QuestionDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
