@@ -2,6 +2,8 @@ package net.java.lms_backend;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class DatabaseInitializer {
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseInitializer.class);
 
     @PostConstruct
     public void initDatabase() {
@@ -27,9 +30,9 @@ public class DatabaseInitializer {
             }
 
             ServerInitializer.runInitScriptFromString(sql.toString());
-            System.out.println("Database initialized.");
+            logger.info("Database initialized.");
         } catch (Exception e) {
-            System.err.println("Error executing initialization script: " + e.getMessage());
+            logger.error("Error executing initialization script: {}", e.getMessage(), e);
         }
     }
 }
