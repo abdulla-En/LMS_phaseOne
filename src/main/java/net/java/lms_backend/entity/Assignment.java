@@ -15,14 +15,12 @@ public class Assignment extends Assessment {
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Submission> submissions = new ArrayList<>();
 
-
-
+    @Override
     public String getTitle() {
         return super.getTitle();
     }
 
-
-
+    @Override
     public void setTitle(String title) {
         super.setTitle(title);
     }
@@ -42,6 +40,4 @@ public class Assignment extends Assessment {
     public void setCourse(Course course) {
         super.setCourse(course);
     }
-
-
 }
