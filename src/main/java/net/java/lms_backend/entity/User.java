@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @Column(unique=true)
 
     private String email;
+    private String resetToken;
 
     private boolean initialAdmin;
     public boolean isInitialAdmin() {
@@ -173,5 +174,14 @@ public class User implements UserDetails {
     public void setFirstName(String firstName) {this.firstName=firstName;}
     public void setLastName(String lastName) {this.lastName=lastName;}
     public void setPassword(String password) {this.password=password;}
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
 
 }
