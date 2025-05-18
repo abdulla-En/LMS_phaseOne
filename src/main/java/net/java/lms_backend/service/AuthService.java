@@ -1,5 +1,6 @@
 package net.java.lms_backend.service;
 
+import net.java.lms_backend.dto.ResetPasswordDTO;
 import net.java.lms_backend.repositrory.EmailSender;
 import net.java.lms_backend.repositrory.UserRepository;
 import net.java.lms_backend.dto.RegisterDTO;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
+
 import static net.java.lms_backend.mapper.UserMapper.ToUserRegister;
 
 @Service
@@ -165,5 +168,22 @@ public class AuthService {
                     .body("Invalid Username, Email or Password");
         }
     }
+
+    @Transactional
+    public ResponseEntity<?> resetPassword(ResetPasswordDTO resetPasswordDTO) {
+        Optional<User> userOptional = userRepository.findByEmail(resetPasswordDTO.getEmail());
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            String resetToken = UUID.randomUUID().toString();
+            user.setResetToken(resetToken);
+            userRepository.save(user);
+
+            System.out.println("Reset link: http://localhost:8080/api/auth/confirm-reset?token=" + resetToken);
+        }
+
+        return ResponseEntity.ok("If the email exists, a reset link has been sent.");
+    }
+
 
 }
