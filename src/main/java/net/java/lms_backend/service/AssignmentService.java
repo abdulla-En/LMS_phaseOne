@@ -5,9 +5,9 @@ import net.java.lms_backend.Repositrory.CourseRepository;
 import net.java.lms_backend.dto.AssignmentDTO;
 import net.java.lms_backend.entity.Assignment;
 import net.java.lms_backend.entity.Course;
-import net.java.lms_backend.exception.AssignmentNotFoundException;
-import net.java.lms_backend.exception.CourseNotFoundException;
 import net.java.lms_backend.mapper.AssignmentMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,13 +48,18 @@ public class AssignmentService {
     // Get an assignment by ID
     public AssignmentDTO getAssignmentById(Long id) {
         Assignment assignment = assignmentRepository.findById(id)
-                .orElseThrow(() -> new AssignmentNotFoundException("Assignment not found with id: " + id));
+            .orElseThrow(() ->
+                new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Assignment not found with id: " + id
+                )
+            ); // :contentReference[oaicite:0]{index=0}
         return assignmentMapper.toDTO(assignment);
     }
 
     // Get all assignments
     public List<AssignmentDTO> getAllAssignments() {
-        // Stream.toList() returns an unmodifiable List as of Java 16+
+        // Stream.toList() returns an unmodifiable List as of Java 16+ :contentReference[oaicite:1]{index=1}
         return assignmentRepository.findAll().stream()
                 .map(assignmentMapper::toDTO)
                 .toList();
@@ -63,14 +68,25 @@ public class AssignmentService {
     // Update an assignment by ID
     public AssignmentDTO updateAssignment(Long id, AssignmentDTO dto) {
         Assignment assignment = assignmentRepository.findById(id)
-                .orElseThrow(() -> new AssignmentNotFoundException("Assignment not found with id: " + id));
+            .orElseThrow(() ->
+                new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Assignment not found with id: " + id
+                )
+            ); // :contentReference[oaicite:2]{index=2}
 
         // Update assignment properties
         assignment.setTitle(dto.getTitle());
         assignment.setDueDate(java.time.LocalDate.parse(dto.getDueDate()));
+
         if (dto.getCourseId() != null) {
             Course course = courseRepository.findById(dto.getCourseId())
-                    .orElseThrow(() -> new CourseNotFoundException("Invalid course ID: " + dto.getCourseId()));
+                .orElseThrow(() ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Invalid course ID: " + dto.getCourseId()
+                    )
+                ); // :contentReference[oaicite:3]{index=3}
             assignment.setCourse(course);
         }
 
@@ -81,7 +97,10 @@ public class AssignmentService {
     // Delete an assignment by ID
     public void deleteAssignment(Long id) {
         if (!assignmentRepository.existsById(id)) {
-            throw new AssignmentNotFoundException("Assignment not found with id: " + id);
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Assignment not found with id: " + id
+            ); // :contentReference[oaicite:4]{index=4}
         }
         assignmentRepository.deleteById(id);
     }
