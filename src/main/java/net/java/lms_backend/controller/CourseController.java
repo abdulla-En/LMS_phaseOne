@@ -113,4 +113,9 @@ public class CourseController {
         return ResponseEntity.ok(questions);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Coursedto>> searchCourses(@RequestParam String query) {
+        List<Coursedto> courses = courseService.searchCourses(query);
+        return ResponseEntity.ok(courses);
+    }
 }

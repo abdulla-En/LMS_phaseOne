@@ -105,6 +105,16 @@ public class CourseService {
                 .map(CourseMapper::mapToCoursedto)
                 .collect(Collectors.toList());
     }
+
+    public List<Coursedto> searchCourses(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return ViewAllCourse(); // Return all courses if search term is empty
+        }
+        List<Course> courses = courseRepo.searchCourses(searchTerm.trim());
+        return courses.stream()
+                .map(CourseMapper::mapToCoursedto)
+                .collect(Collectors.toList());
+    }
     public void deleteCourse(Long CourseId){
 
         courseRepo.deleteById(CourseId);
