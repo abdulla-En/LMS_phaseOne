@@ -1,18 +1,25 @@
 package net.java.lms_backend.mapper;
 
-import net.java.lms_backend.repositrory.CourseRepository;
+import net.java.lms_backend.Repositrory.CourseRepository;
 import net.java.lms_backend.dto.AssignmentDTO;
 import net.java.lms_backend.entity.Assignment;
 import net.java.lms_backend.entity.Course;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
 public class AssignmentMapper {
-    @Autowired
-    private CourseRepository courseRepository; // Repository to fetch Course
+
+    private final CourseRepository courseRepository;
+
+    // Constructor injection makes the dependency explicit and allows the field to be final.
+    public AssignmentMapper(CourseRepository courseRepository) {
+        if (courseRepository == null) {
+            throw new IllegalArgumentException("CourseRepository cannot be null");
+        }
+        this.courseRepository = courseRepository;
+    }
 
     public Assignment toEntity(AssignmentDTO dto) {
         Assignment assignment = new Assignment();
